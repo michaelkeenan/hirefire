@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 require 'heroku'
 
 module HireFire
@@ -19,18 +17,18 @@ module HireFire
       #   @param [nil] amount
       #   @return [Fixnum] will request the amount of currently running workers from Heroku
       def workers(amount = nil)
-
+        heroku = Heroku::API.new(:api_key => ENV['HEROKU_API_KEY']) 
         #
         # Returns the amount of Delayed Job
         # workers that are currently running on Heroku
         if amount.nil?
-          return client.info(ENV['APP_NAME'])[:workers].to_i
+          return heroku.get_ps(ENV['APP_NAME']).body.select {|p| p['process'] =~ /worker.[0-9]+/}.length
         end
 
         ##
         # Sets the amount of Delayed Job
         # workers that need to be running on Heroku
-        client.set_workers(ENV['APP_NAME'], amount)
+        return heroku.post_ps_scale(ENV['APP_NAME'], "worker", amount) 
 
       rescue RestClient::Exception
         # Heroku library uses rest-client, currently, and it is quite
@@ -38,15 +36,7 @@ module HireFire
         HireFire::Logger.message("Worker query request failed with #{ $!.class.name } #{ $!.message }")
         nil
       end
-
-      ##
-      # @return [Heroku::Client] instance of the heroku client
-      def client
-        @client ||= ::Heroku::Client.new(
-          ENV['HIREFIRE_EMAIL'], ENV['HIREFIRE_PASSWORD']
-        )
-      end
-
+      
     end
   end
 end
