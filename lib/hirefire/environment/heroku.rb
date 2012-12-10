@@ -17,7 +17,7 @@ module HireFire
       #   @param [nil] amount
       #   @return [Fixnum] will request the amount of currently running workers from Heroku
       def workers(amount = nil)
-        heroku = Heroku::API.new(:api_key => ENV['HEROKU_API_KEY']) 
+        heroku = ::Heroku::API.new(:api_key => ENV['HEROKU_API_KEY'])
         #
         # Returns the amount of Delayed Job
         # workers that are currently running on Heroku
