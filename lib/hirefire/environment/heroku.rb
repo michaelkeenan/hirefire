@@ -30,7 +30,7 @@ module HireFire
         # workers that need to be running on Heroku
         return heroku.post_ps_scale(ENV['APP_NAME'], "worker", amount) 
 
-      rescue RestClient::Exception
+      rescue Exception
         # Heroku library uses rest-client, currently, and it is quite
         # possible to receive RestClient exceptions through the client.
         HireFire::Logger.message("Worker query request failed with #{ $!.class.name } #{ $!.message }")
