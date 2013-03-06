@@ -70,7 +70,7 @@ Be sure to add the following Heroku environment variables so HireFire can manage
 
     heroku config:add HEROKU_API_KEY=<your_heroku_api_key> APP_NAME=<your_appname>
 
-These are the same email and password credentials you use to log in to the Heroku web interface to manage your workers.
+You can get your API key on your Heroku's account page. The appname is the same as your app's name as known by Heroku.
 
 And that's it. Next time you deploy to [Heroku](http://heroku.com/) it'll automatically hire and fire your workers. Now, there are defaults, but I highly recommend you configure it since it only takes a few seconds. Create an initializer file:
 
