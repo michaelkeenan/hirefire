@@ -1,3 +1,17 @@
+FORK
+====
+
+* Fork from https://github.com/acanby/hirefire
+* HireFire is not maintained anymore, trying to maintain it by ourself.
+* Updated (by previous forker) to support heroku-api gem in replacement of deprecated heroku gem.
+* Updated for Resque 1.23.
+
+Author
+------
+
+Romain Champourlier ([@softrli](http://twitter.com/#!/softrli))
+
+
 HireFire - The Heroku Worker Manager
 ====================================
 
