@@ -23,7 +23,7 @@ module HireFire
         # workers that are currently running on Heroku
         if amount.nil?
           processes = heroku.get_ps(ENV['APP_NAME']).body.select {|p| p['process'] =~ /worker.[0-9]+/}.length
-          puts "Queried Heroku for processes - result: #{processes}"
+          HireFire::Logger.message("Queried Heroku for processes - result: #{processes}")
           return processes
         end
 
