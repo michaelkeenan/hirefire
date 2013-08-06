@@ -165,7 +165,7 @@ module HireFire
       #
       # @return [Boolean] if the workers have been fired
       def fire
-        if jobs == 0 and workers > min_workers
+        if jobs == 0 and workers and workers > min_workers
           Logger.message("All queued jobs have been processed. " + (min_workers > 0 ? "Setting workers to #{min_workers}." : "Firing all workers."))
           workers(min_workers)
 

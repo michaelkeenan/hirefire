@@ -2,3 +2,8 @@
 *.gem
 .yardoc/*
 .yardoc/**/*
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+/.idea

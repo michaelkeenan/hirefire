@@ -47,7 +47,7 @@ module Delayed
         break if $exit
 
         if count.zero?
-          sleep(1)
+          sleep(10)
         else
           HireFire::Logger.message "#{count} jobs processed at %.4f j/s, %d failed ..." % [count / realtime, result.last]
         end

@@ -17,12 +17,18 @@ module HireFire
       #   @param [nil] amount
       #   @return [Fixnum] will request the amount of currently running workers from Heroku
       def workers(amount = nil)
+<<<<<<< HEAD
         heroku = ::Heroku::API.new(:api_key => ENV['HEROKU_API_KEY'])
+=======
+        heroku = ::Heroku::API.new(:api_key => ENV['HEROKU_API_KEY']) 
+>>>>>>> develop
         #
         # Returns the amount of Delayed Job
         # workers that are currently running on Heroku
         if amount.nil?
-          return heroku.get_ps(ENV['APP_NAME']).body.select {|p| p['process'] =~ /worker.[0-9]+/}.length
+          processes = heroku.get_ps(ENV['APP_NAME']).body.select {|p| p['process'] =~ /worker.[0-9]+/}.length
+          HireFire::Logger.message("Queried Heroku for processes - result: #{processes}")
+          return processes
         end
 
         ##
@@ -30,7 +36,11 @@ module HireFire
         # workers that need to be running on Heroku
         return heroku.post_ps_scale(ENV['APP_NAME'], "worker", amount) 
 
+<<<<<<< HEAD
       rescue Exception
+=======
+      rescue ::Heroku::API::Errors
+>>>>>>> develop
         # Heroku library uses rest-client, currently, and it is quite
         # possible to receive RestClient exceptions through the client.
         HireFire::Logger.message("Worker query request failed with #{ $!.class.name } #{ $!.message }")
