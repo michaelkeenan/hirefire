@@ -1,3 +1,8 @@
+FORKED FORK
+====
+
+* This version re-runs failed jobs, rather than ignoring them.
+
 FORK
 ====
 
