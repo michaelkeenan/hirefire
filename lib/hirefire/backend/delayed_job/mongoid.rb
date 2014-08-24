@@ -7,12 +7,11 @@ module HireFire
 
         ##
         # Counts the amount of queued jobs in the database,
-        # failed jobs and jobs scheduled for the future are excluded
+        # failed jobs are NOT excluded; jobs scheduled for the future are excluded
         #
         # @return [Fixnum]
         def jobs
           ::Delayed::Job.where(
-            :failed_at  => nil,
             :run_at.lte => Time.now
           ).count
         end

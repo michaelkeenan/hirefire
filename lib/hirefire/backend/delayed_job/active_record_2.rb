@@ -7,12 +7,12 @@ module HireFire
 
         ##
         # Counts the amount of queued jobs in the database,
-        # failed jobs are excluded from the sum
+        # failed jobs are NOT excluded from the sum
         #
         # @return [Fixnum] the amount of pending jobs
         def jobs
           ::Delayed::Job.all(
-            :conditions => ['failed_at IS NULL and run_at <= ?', Time.now.utc]
+            :conditions => ['run_at <= ?', Time.now.utc]
           ).count
         end
 
